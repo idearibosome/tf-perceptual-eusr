@@ -1,2 +1,6 @@
-# tf_perceptual_eusr
-A TensorFlow-based image super-resolution model considering both quantitative and perceptual quality
+# 4PP-EUSR
+Four-pass perceptual super-resolution with enhanced upscaling
+
+## Introduction
+This repository contains a TensorFlow-based implementation of 4PP-EUSR, which considers both the quantitative and perceptual quality of the upscaled images.
+Our method won the 2nd place for Region 2 in the PIRM Challenge on Perceptual Super Resolution at ECCV 2018.
