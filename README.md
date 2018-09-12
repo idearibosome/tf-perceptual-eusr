@@ -19,9 +19,9 @@ Generating upscaled images from the trained models can be done by `test/test.py`
 Following are the brief instructions.
 
 1. Download and copy the trained model available in [Downloads](#downloads) section to the `test/` folder.
-2. Place the low-resolution images (PNG only) to the `test/LR` folder.
+2. Place the low-resolution images (PNG only) to the `test/LR/` folder.
 3. Run `python test.py --model_name [model file name]`. For example, if you downloaded the PIRM Challenge version of our pre-trained model, run `python test.py --model_name 4pp_eusr_pirm.pb`.
-4. The upscaled images will be available on the `test/SR` folder.
+4. The upscaled images will be available on the `test/SR/` folder.
 
 Please run `python test.py --help` for more information.
 
