@@ -25,6 +25,10 @@ SRGAN-VGG22 | 25.697 | 0.660 | 2.631
 SRGAN-VGG54 | 25.176 | 0.641 | 2.351
 CX | 24.581 | 0.644 | 2.250
 
+Please cite following papers when you use the code, pre-trained models, or results:
+- J.-H. Choi, J.-H. Kim, M. Cheon, J.-S. Lee: Deep Learning-based Image Super-Resolution Considering Quantitative and Perceptual Quality. arXiv:xxxx.xxxxx (2018) (will be available soon)
+- J.-H. Kim, J.-S. Lee: [Deep residual network with enhanced upscaling module for super-resolution](http://openaccess.thecvf.com/content_cvpr_2018_workshops/w13/html/Kim_Deep_Residual_Network_CVPR_2018_paper.html). In: Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops (2018)
+
 ## Dependencies
 - Python 3.6+
 - TensorFlow 1.8+
