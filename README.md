@@ -4,3 +4,13 @@ Four-pass perceptual super-resolution with enhanced upscaling
 ## Introduction
 This repository contains a TensorFlow-based implementation of 4PP-EUSR, which considers both the quantitative and perceptual quality of the upscaled images.
 Our method won the 2nd place for Region 2 in the [PIRM Challenge on Perceptual Super Resolution at ECCV 2018](https://www.pirm2018.org/PIRM-SR.html).
+
+## Downloads
+
+Pre-trained models:
+- PIRM Challenge version: [4pp_eusr_pirm.pb](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_pirm.pb)
+- Paper version: [4pp_eusr_paper.pb](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_paper.pb)
+
+Results (Set5, Set14, BSD100, PIRM):
+- PIRM Challenge version: [4pp_eusr_results_pirm.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_pirm.zip)
+- Paper version: [4pp_eusr_results_paper.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_paper.zip)
