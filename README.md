@@ -9,6 +9,21 @@ Our method won the 2nd place for Region 2 in the [PIRM Challenge on Perceptual S
 ![BSD100 - 37073](figures/bsd100_37073.png)
 ※ The perceptual index is calculated by "0.5 * ((10 - [Ma](https://sites.google.com/site/chaoma99/sr-metric)) + [NIQE](https://doi.org/10.1109/LSP.2012.2227726))", which is used in the [PIRM Challenge](https://www.pirm2018.org/PIRM-SR.html).
 
+Followings are the performance comparison evaluated on the [BSD100](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/) dataset.
+
+Method | PSNR (dB) (↓) | SSIM | Perceptual Index
+------------ | :---: | :---: | :---:
+EDSR | 27.796 | 0.744 | 5.326
+MDSR | 27.771 | 0.743 | 5.424
+EUSR | 27.674 | 0.740 | 5.307
+SRResNet-MSE | 27.601 | 0.737 | 5.217
+**4PP-EUSR (PIRM Challenge)** | 26.569 | 0.688 | 2.683
+SRResNet-VGG22 | 26.322 | 0.694 | 5.183
+SRGAN-MSE | 25.981 | 0.643 | 2.802
+Bicubic interpolation | 25.957 | 0.669 | 6.995
+SRGAN-VGG22 | 25.697 | 0.660 | 2.631
+SRGAN-VGG54 | 25.176 | 0.641 | 2.351
+CX | 24.581 | 0.644 | 2.250
 
 ## Dependencies
 - Python 3.6+
