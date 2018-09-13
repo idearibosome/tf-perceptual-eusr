@@ -56,6 +56,3 @@ Pre-trained models:
 Results (Set5, Set14, BSD100, PIRM):
 - PIRM Challenge version: [4pp_eusr_results_pirm.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_pirm.zip)
 - Paper version: [4pp_eusr_results_paper.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_paper.zip)
-
-## Acknowledgements
-This research was supported by the MSIT (Ministry of Science and ICT), Korea, under the "ICT Consilience Creative Program" (IITP-2018-2017-0-01015) supervised by the IITP (Institute for Information & communications Technology Promotion). In addition, this work was also supported by the IITP grant funded by the Korea government (MSIT) (R7124-16-0004, Development of Intelligent Interaction Technology Based on Context Awareness and Human Intention Understanding).
