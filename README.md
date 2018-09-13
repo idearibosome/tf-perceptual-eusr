@@ -27,7 +27,7 @@ CX | 24.581 | 0.644 | 2.250
 
 Please cite following papers when you use the code, pre-trained models, or results:
 - J.-H. Choi, J.-H. Kim, M. Cheon, J.-S. Lee: Deep learning-based image super-resolution considering quantitative and perceptual quality. arXiv:xxxx.xxxxx (2018) (will be available soon)
-- J.-H. Kim, J.-S. Lee: [Deep residual network with enhanced upscaling module for super-resolution](http://openaccess.thecvf.com/content_cvpr_2018_workshops/w13/html/Kim_Deep_Residual_Network_CVPR_2018_paper.html). In: Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops (2018)
+- J.-H. Kim, J.-S. Lee: [Deep residual network with enhanced upscaling module for super-resolution](http://openaccess.thecvf.com/content_cvpr_2018_workshops/w13/html/Kim_Deep_Residual_Network_CVPR_2018_paper.html). In: Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, pp. 913-921 (2018)
 
 ## Dependencies
 - Python 3.6+
@@ -45,11 +45,10 @@ Following are the brief instructions.
 Please run `python test.py --help` for more information.
 
 ## Training 4PP-EUSR
-The training code is not yet available.
-Please stay tuned for further updates. :)
+Currently, the training code is not available.
+We are working hard on writing the training code for public, so please stay tuned for further updates. :)
 
 ## Downloads
-
 Pre-trained models:
 - PIRM Challenge version: [4pp_eusr_pirm.pb](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_pirm.pb)
 - Paper version: [4pp_eusr_paper.pb](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_paper.pb)
@@ -57,3 +56,6 @@ Pre-trained models:
 Results (Set5, Set14, BSD100, PIRM):
 - PIRM Challenge version: [4pp_eusr_results_pirm.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_pirm.zip)
 - Paper version: [4pp_eusr_results_paper.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_paper.zip)
+
+## Acknowledgements
+This research was supported by the MSIT (Ministry of Science and ICT), Korea, under the "ICT Consilience Creative Program" (IITP-2018-2017-0-01015) supervised by the IITP (Institute for Information & communications Technology Promotion). In addition, this work was also supported by the IITP grant funded by the Korea government (MSIT) (R7124-16-0004, Development of Intelligent Interaction Technology Based on Context Awareness and Human Intention Understanding).
