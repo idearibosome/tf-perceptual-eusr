@@ -3,7 +3,7 @@ Four-pass perceptual super-resolution with enhanced upscaling
 
 
 ## Introduction
-This repository contains a TensorFlow-based implementation of 4PP-EUSR, which considers both the quantitative and perceptual quality of the upscaled images.
+This repository contains a TensorFlow-based implementation of [4PP-EUSR](http://arxiv.org/abs/1809.04789), which considers both the quantitative and perceptual quality of the upscaled images.
 Our method won the 2nd place for Region 2 in the [PIRM Challenge on Perceptual Super Resolution at ECCV 2018](https://www.pirm2018.org/PIRM-SR.html).
 
 ![BSD100 - 37073](figures/bsd100_37073.png)
@@ -26,7 +26,7 @@ SRGAN-VGG54 | 25.176 | 0.641 | 2.351
 CX | 24.581 | 0.644 | 2.250
 
 Please cite following papers when you use the code, pre-trained models, or results:
-- J.-H. Choi, J.-H. Kim, M. Cheon, J.-S. Lee: Deep learning-based image super-resolution considering quantitative and perceptual quality. arXiv:xxxx.xxxxx (2018) (will be available soon)
+- J.-H. Choi, J.-H. Kim, M. Cheon, J.-S. Lee: [Deep learning-based image super-resolution considering quantitative and perceptual quality](http://arxiv.org/abs/1809.04789). arXiv:1809.04789 (2018)
 - J.-H. Kim, J.-S. Lee: [Deep residual network with enhanced upscaling module for super-resolution](http://openaccess.thecvf.com/content_cvpr_2018_workshops/w13/html/Kim_Deep_Residual_Network_CVPR_2018_paper.html). In: Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, pp. 913-921 (2018)
 
 ## Dependencies
