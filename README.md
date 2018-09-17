@@ -3,27 +3,27 @@ Four-pass perceptual super-resolution with enhanced upscaling
 
 
 ## Introduction
-This repository contains a TensorFlow-based implementation of [4PP-EUSR](http://arxiv.org/abs/1809.04789), which considers both the quantitative and perceptual quality of the upscaled images.
+This repository contains a TensorFlow-based implementation of **[4PP-EUSR ("Deep learning-based image super-resolution considering quantitative and perceptual quality")](http://arxiv.org/abs/1809.04789)**, which considers both the quantitative (e.g., PSNR) and perceptual quality (e.g., NIQE) of the upscaled images.
 Our method won the 2nd place for Region 2 in the [PIRM Challenge on Perceptual Super Resolution at ECCV 2018](https://www.pirm2018.org/PIRM-SR.html).
 
 ![BSD100 - 37073](figures/bsd100_37073.png)
-※ The perceptual index is calculated by "0.5 * ((10 - [Ma](https://sites.google.com/site/chaoma99/sr-metric)) + [NIQE](https://doi.org/10.1109/LSP.2012.2227726))", which is used in the [PIRM Challenge](https://www.pirm2018.org/PIRM-SR.html).
+※ The perceptual index is calculated by "0.5 * ((10 - [Ma](https://sites.google.com/site/chaoma99/sr-metric)) + [NIQE](https://doi.org/10.1109/LSP.2012.2227726))", which is used in the [PIRM Challenge](https://www.pirm2018.org/PIRM-SR.html). Lower is better.
 
 Followings are the performance comparison evaluated on the [BSD100](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/) dataset.
 
-Method | PSNR (dB) (↓) | SSIM | Perceptual Index
------------- | :---: | :---: | :---:
-EDSR | 27.796 | 0.744 | 5.326
-MDSR | 27.771 | 0.743 | 5.424
-EUSR | 27.674 | 0.740 | 5.307
-SRResNet-MSE | 27.601 | 0.737 | 5.217
-**4PP-EUSR (PIRM Challenge)** | 26.569 | 0.688 | 2.683
-SRResNet-VGG22 | 26.322 | 0.694 | 5.183
-SRGAN-MSE | 25.981 | 0.643 | 2.802
-Bicubic interpolation | 25.957 | 0.669 | 6.995
-SRGAN-VGG22 | 25.697 | 0.660 | 2.631
-SRGAN-VGG54 | 25.176 | 0.641 | 2.351
-CX | 24.581 | 0.644 | 2.250
+Method | PSNR (dB) (↓) | Perceptual Index
+------------ | :---: | :---:
+[EDSR](https://github.com/thstkdgus35/EDSR-PyTorch) | 27.796 | 5.326
+[MDSR](https://github.com/thstkdgus35/EDSR-PyTorch) | 27.771 | 5.424
+[EUSR](https://github.com/ghgh3269/EUSR-Tensorflow) | 27.674 | 5.307
+[SRResNet-MSE](https://arxiv.org/abs/1609.04802) | 27.601 | 5.217
+**4PP-EUSR (PIRM Challenge)** | **26.569** | **2.683**
+[SRResNet-VGG22](https://arxiv.org/abs/1609.04802) | 26.322 | 5.183
+[SRGAN-MSE](https://arxiv.org/abs/1609.04802) | 25.981 | 2.802
+Bicubic interpolation | 25.957 | 6.995
+[SRGAN-VGG22](https://arxiv.org/abs/1609.04802) | 25.697 | 2.631
+[SRGAN-VGG54](https://arxiv.org/abs/1609.04802) | 25.176 | 2.351
+[CX](https://arxiv.org/abs/1803.04626) | 24.581 | 2.250
 
 Please cite following papers when you use the code, pre-trained models, or results:
 - J.-H. Choi, J.-H. Kim, M. Cheon, J.-S. Lee: [Deep learning-based image super-resolution considering quantitative and perceptual quality](http://arxiv.org/abs/1809.04789). arXiv:1809.04789 (2018)
