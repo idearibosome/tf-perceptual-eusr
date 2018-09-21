@@ -4,7 +4,7 @@ Four-pass perceptual super-resolution with enhanced upscaling
 
 ## Introduction
 This repository contains a TensorFlow-based implementation of **[4PP-EUSR ("Deep learning-based image super-resolution considering quantitative and perceptual quality")](http://arxiv.org/abs/1809.04789)**, which considers both the quantitative (e.g., PSNR) and perceptual quality (e.g., NIQE) of the upscaled images.
-Our method won the 2nd place for Region 2 in the [PIRM Challenge on Perceptual Super Resolution at ECCV 2018](https://www.pirm2018.org/PIRM-SR.html).
+Our method **won the 2nd place for Region 2 and got the highest human opinion score for Region 2** in the [PIRM Challenge on Perceptual Super Resolution at ECCV 2018](https://arxiv.org/abs/1809.07517).
 
 ![BSD100 - 37073](figures/bsd100_37073.png)
 ※ The perceptual index is calculated by "0.5 * ((10 - [Ma](https://sites.google.com/site/chaoma99/sr-metric)) + [NIQE](https://doi.org/10.1109/LSP.2012.2227726))", which is used in the [PIRM Challenge](https://www.pirm2018.org/PIRM-SR.html). Lower is better.
