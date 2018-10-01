@@ -58,8 +58,10 @@ def main(unused_argv):
   # train
   local_train_step = 0
   while (model.global_step < FLAGS.max_steps):
-    global_train_step = model.global_step    
-    with_summary = True if (local_train_step > 0 and local_train_step % FLAGS.summary_freq == 0) else False
+    global_train_step = model.global_step + 1
+    local_train_step += 1
+
+    with_summary = True if (local_train_step % FLAGS.summary_freq == 0) else False
 
     start_time = time.time()
 
@@ -71,13 +73,12 @@ def main(unused_argv):
     if (FLAGS.sleep_ratio > 0):
       time.sleep(min(1.0, duration*FLAGS.sleep_ratio))
 
-    if (local_train_step > 0 and local_train_step % FLAGS.log_freq == 0):
+    if (local_train_step % FLAGS.log_freq == 0):
       tf.logging.info('step %d, scale x%d, loss %.6f (%.3f sec/batch)' % (global_train_step, scale, loss, duration))
     
     if (summary is not None):
       summary_writers[scale].add_summary(summary, global_step=global_train_step)
 
-    local_train_step += 1
 
 
 if __name__ == '__main__':
