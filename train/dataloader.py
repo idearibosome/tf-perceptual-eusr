@@ -62,7 +62,6 @@ class DataLoader():
       scale: Scale of the input image patches.
       input_patch_size: Size of the input image patches.
     Returns:
-      (input_list, truth_list)
       input_list: A list of input image patches.
       truth_list: A list of ground-truth image patches.
     """
