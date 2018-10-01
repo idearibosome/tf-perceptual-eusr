@@ -14,7 +14,7 @@ Briefly, there are three training phases to get a 4PP-EUSR model as follows:
 ### Pre-training the EUSR model
 The EUSR model is implemented and refactored from its [official TensorFlow-based implementation](https://github.com/junhyukk/EUSR-Tensorflow).
 
-You can try out our EUSR training code by running the following code:
+You can try out our EUSR training code by running the following command:
 ```
 python train.py --data_input_path=[data_input_path] -data_truth_path=[data_truth_path] --train_path=/tmp/tf-perceptual-eusr/eusr --model=eusr --scales=2,4,8
 ```
