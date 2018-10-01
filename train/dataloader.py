@@ -29,7 +29,7 @@ class DataLoader():
     scale = self.scale_list[0]
     input_path = os.path.join(FLAGS.data_input_path, ('x%d' % (scale)))
     self.image_name_list = [f for f in os.listdir(input_path) if f.lower().endswith('.png')]
-    tf.logging.info('data: %d images are prepared' % (len(self.image_name_list)))
+    tf.logging.info('data: %d images are prepared (%s)' % (len(self.image_name_list), 'caching enabled' if FLAGS.data_cached else 'caching disabled'))
 
     # initialize image reading session
     self.tf_image_graph = tf.Graph()
