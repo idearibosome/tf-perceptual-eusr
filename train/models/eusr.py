@@ -147,9 +147,9 @@ class EUSR(BaseModel):
   
 
   def _local_residual_block(self, x, num_features, kernel_size, weight=1.0):
-    res = self._conv2d(x, num_features=num_features, kernel_size=kernel_size)
+    res = self._conv2d_for_residual_block(x, num_features=num_features, kernel_size=kernel_size)
     res = tf.nn.relu(res)
-    res = self._conv2d(res, num_features=num_features, kernel_size=kernel_size)
+    res = self._conv2d_for_residual_block(res, num_features=num_features, kernel_size=kernel_size)
     res *= weight
     x = x + res
     return x
