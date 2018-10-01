@@ -80,7 +80,7 @@ def main(unused_argv):
     if (summary is not None):
       summary_writers[scale].add_summary(summary, global_step=global_train_step)
     
-    if (local_train_step % FLAGS.save_max_keep == 0):
+    if (local_train_step % FLAGS.save_freq == 0):
       model.save(base_path=FLAGS.train_path)
       tf.logging.info('saved a model checkpoint at step %d' % (global_train_step))
 
