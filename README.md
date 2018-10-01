@@ -45,8 +45,8 @@ Following are the brief instructions.
 Please run `python test.py --help` for more information.
 
 ## Training 4PP-EUSR
-Currently, the training code is not available.
-We are working hard on writing the training code for public, so please stay tuned for further updates. :)
+Implementing the training code is in progress.
+Please refer to [README.md on the `train/` folder](train/) for more information.
 
 ## Downloads
 Pre-trained models:
