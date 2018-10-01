@@ -84,6 +84,9 @@ def main(unused_argv):
       model.save(base_path=FLAGS.train_path)
       tf.logging.info('saved a model checkpoint at step %d' % (global_train_step))
 
+    
+  # finalize
+  tf.logging.info('finished')
 
 
 if __name__ == '__main__':
