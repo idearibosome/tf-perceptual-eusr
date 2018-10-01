@@ -21,6 +21,7 @@ if __name__ == '__main__':
   tf.flags.DEFINE_integer('log_freq', 10, 'The frequency of logging via tf.logging.')
   tf.flags.DEFINE_integer('summary_freq', 200, 'The frequency of logging on TensorBoard.')
   tf.flags.DEFINE_integer('save_freq', 50000, 'The frequency of saving the trained model.')
+  tf.flags.DEFINE_integer('save_max_keep', 100, 'The maximum number of recent trained models to keep (i.e., max_to_keep of tf.train.Saver).')
   tf.flags.DEFINE_float('sleep_ratio', 0.05, 'The ratio of sleeping time for each training step, which prevents overheating of GPUs. Specify 0 to disable sleeping.')
 
   tf.flags.DEFINE_string('restore_path', None, 'Checkpoint path to be restored. Specify this to resume the training or use pre-trained parameters.')
@@ -78,6 +79,10 @@ def main(unused_argv):
     
     if (summary is not None):
       summary_writers[scale].add_summary(summary, global_step=global_train_step)
+    
+    if (local_train_step % FLAGS.save_max_keep == 0):
+      model.save(base_path=FLAGS.train_path)
+      tf.logging.info('saved a model checkpoint at step %d' % (global_train_step))
 
 
 

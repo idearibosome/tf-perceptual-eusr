@@ -24,6 +24,14 @@ class BaseModel:
     """
     raise NotImplementedError
   
+  def save(self, base_path):
+    """
+    Save the current trained model.
+    Args:
+      base_path: Path of the checkpoint directory to be saved.
+    """
+    raise NotImplementedError
+  
   def restore(self, ckpt_path, target=None):
     """
     Restore parameters of the model.

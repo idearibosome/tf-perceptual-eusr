@@ -1,4 +1,5 @@
 import math
+import os
 
 import numpy as np
 import tensorflow as tf
@@ -77,7 +78,7 @@ class EUSR(BaseModel):
         for key, loss in self.loss_dict.items():
           tf.summary.scalar(('loss/%s' % (key)), loss)
 
-        self.tf_saver = tf.train.Saver()
+        self.tf_saver = tf.train.Saver(max_to_keep=FLAGS.save_max_keep)
         self.tf_summary_op = tf.summary.merge_all()
       
       self.tf_init_op = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
@@ -90,6 +91,11 @@ class EUSR(BaseModel):
     ), graph=self.tf_graph)
     self.tf_session.run(self.tf_init_op)
       
+  
+  def save(self, base_path):
+    save_path = os.path.join(base_path, 'model.ckpt')
+    self.tf_saver.save(sess=self.tf_session, save_path=save_path, global_step=self.global_step)
+
 
   def restore(self, ckpt_path, target=None):
     # TODO
