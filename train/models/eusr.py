@@ -8,6 +8,7 @@ from models.base_model import BaseModel
 
 FLAGS = tf.flags.FLAGS
 
+tf.flags.DEFINE_string('eusr_model_scales', '2,4,8', 'Supported scales of the model. Use the \',\' character to specify multiple scales (e.g., 2,4,8). This parameter is involved in constructing the multi-scale structure of the model.')
 tf.flags.DEFINE_integer('eusr_conv_features', 64, 'The number of convolutional features.')
 tf.flags.DEFINE_integer('eusr_shared_blocks', 32, 'The number of local residual blocks (LRBs) in the shared feature extraction part.')
 tf.flags.DEFINE_integer('eusr_upscale_blocks', 1, 'The number of local residual blocks (LRBs) in the enhanced upscaling modules (EUMs).')
@@ -30,8 +31,13 @@ class EUSR(BaseModel):
     self.global_step = global_step
 
     self.scale_list = list(map(lambda x: int(x), FLAGS.scales.split(',')))
+    self.model_scale_list = list(map(lambda x: int(x), FLAGS.eusr_model_scales.split(',')))
+    print(self.model_scale_list)
     for scale in self.scale_list:
-      if (not scale in [2, 4, 8]):
+      if (not scale in self.model_scale_list):
+        raise ValueError('Unsupported scale is provided.')
+    for scale in self.model_scale_list:
+      if (scale & (scale - 1)) != 0:
         raise ValueError('Unsupported scale is provided.')
 
     self.num_conv_features = FLAGS.eusr_conv_features
@@ -169,7 +175,7 @@ class EUSR(BaseModel):
     return x
   
   def _enhanced_upscaling_module(self, x, scale):
-    if not scale in [2, 4, 8]:
+    if (scale & (scale - 1)) != 0:
       raise NotImplementedError
     
     for module_index in range(int(math.log(scale, 2))):
@@ -211,9 +217,14 @@ class EUSR(BaseModel):
 
       # scale-specific local residual blocks
       with tf.variable_scope('initial_blocks'):
-        x = tf.cond(tf.equal(scale, 2), lambda: self._scale_specific_processing(x, scale=2), 
-          lambda: tf.cond(tf.equal(scale, 4), lambda: self._scale_specific_processing(x, scale=4), 
-          lambda: self._scale_specific_processing(x, scale=8)))
+        pred_fn_pairs = []
+        if (2 in self.model_scale_list):
+          pred_fn_pairs.append((tf.equal(scale, 2), lambda: self._scale_specific_processing(x, scale=2)))
+        if (4 in self.model_scale_list):
+          pred_fn_pairs.append((tf.equal(scale, 4), lambda: self._scale_specific_processing(x, scale=4)))
+        if (8 in self.model_scale_list):
+          pred_fn_pairs.append((tf.equal(scale, 8), lambda: self._scale_specific_processing(x, scale=8)))
+        x = tf.case(pred_fn_pairs, exclusive=True)
       
       # shared residual module
       with tf.variable_scope('shared'):
@@ -221,9 +232,14 @@ class EUSR(BaseModel):
 
       # scale-specific upsampling
       with tf.variable_scope('upscaling'):
-        x = tf.cond(tf.equal(scale, 2), lambda: self._scale_specific_upsampling(x, scale=2), 
-          lambda: tf.cond(tf.equal(scale, 4), lambda: self._scale_specific_upsampling(x, scale=4), 
-          lambda: self._scale_specific_upsampling(x, scale=8)))
+        pred_fn_pairs = []
+        if (2 in self.model_scale_list):
+          pred_fn_pairs.append((tf.equal(scale, 2), lambda: self._scale_specific_upsampling(x, scale=2)))
+        if (4 in self.model_scale_list):
+          pred_fn_pairs.append((tf.equal(scale, 4), lambda: self._scale_specific_upsampling(x, scale=4)))
+        if (8 in self.model_scale_list):
+          pred_fn_pairs.append((tf.equal(scale, 8), lambda: self._scale_specific_upsampling(x, scale=8)))
+        x = tf.case(pred_fn_pairs, exclusive=True)
       
       # post-process
       output_list = x
