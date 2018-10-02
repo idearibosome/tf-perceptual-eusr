@@ -1,4 +1,5 @@
 import importlib
+import json
 import os
 import time
 
@@ -57,6 +58,11 @@ def main(unused_argv):
     summary_path = os.path.join(FLAGS.train_path, 'x%d' % (scale))
     summary_writer = tf.summary.FileWriter(summary_path, graph=model.get_session().graph)
     summary_writers[scale] = summary_writer
+  
+  # save arguments
+  arguments_path = os.path.join(FLAGS.train_path, 'arguments.json')
+  with open(arguments_path, 'w') as f:
+    f.write(json.dumps(FLAGS.flag_values_dict(), sort_keys=True, indent=2))
 
   # train
   local_train_step = 0
