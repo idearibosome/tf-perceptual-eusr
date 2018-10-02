@@ -68,13 +68,13 @@ class EUSR(BaseModel):
       self.tf_output = self._generator(input_list=self.tf_input, scale=self.tf_scale)
       
       if (is_training):
-        input_summary = tf.cast(self.tf_input, tf.uint8)
+        input_summary = tf.cast(tf.clip_by_value(self.tf_input, 0.0, 255.0), tf.uint8)
         tf.summary.image('input', input_summary)
-        output_summary = tf.cast(self.tf_output, tf.uint8)
+        output_summary = tf.cast(tf.clip_by_value(self.tf_output, 0.0, 255.0), tf.uint8)
         tf.summary.image('output', output_summary)
         
         self.tf_truth = tf.placeholder(tf.float32, [None, None, None, 3])
-        truth_summary = tf.cast(self.tf_truth, tf.uint8)
+        truth_summary = tf.cast(tf.clip_by_value(self.tf_truth, 0.0, 255.0), tf.uint8)
         tf.summary.image('truth', truth_summary)
 
         self.tf_global_step = tf.placeholder(tf.int64, [])
