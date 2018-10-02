@@ -32,7 +32,6 @@ class EUSR(BaseModel):
 
     self.scale_list = list(map(lambda x: int(x), FLAGS.scales.split(',')))
     self.model_scale_list = list(map(lambda x: int(x), FLAGS.eusr_model_scales.split(',')))
-    print(self.model_scale_list)
     for scale in self.scale_list:
       if (not scale in self.model_scale_list):
         raise ValueError('Unsupported scale is provided.')
