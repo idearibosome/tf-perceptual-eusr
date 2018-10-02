@@ -49,6 +49,7 @@ def main(unused_argv):
   # model > restore
   if (FLAGS.restore_path is not None):
     model.restore(ckpt_path=FLAGS.restore_path, target=FLAGS.restore_target)
+    tf.logging.info('restored the model')
 
   # model > summary
   summary_writers = {}

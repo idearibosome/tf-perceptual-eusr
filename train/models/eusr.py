@@ -103,8 +103,9 @@ class EUSR(BaseModel):
 
 
   def restore(self, ckpt_path, target=None):
-    # TODO
-    raise NotImplementedError
+    with self.tf_graph.as_default():
+      restorer = tf.train.Saver()
+      restorer.restore(sess=self.tf_session, save_path=ckpt_path)
   
 
   def get_session(self):
