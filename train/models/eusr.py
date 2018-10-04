@@ -137,8 +137,14 @@ class EUSR(BaseModel):
 
 
   def upscale(self, input_list, scale):
-    # TODO
-    raise NotImplementedError
+    feed_dict = {}
+    feed_dict[self.tf_input] = input_list
+    feed_dict[self.tf_scale] = scale
+    feed_dict[self.tf_global_step] = self.global_step
+
+    output_list = self.tf_session.run(self.tf_output, feed_dict=feed_dict)
+
+    return output_list
   
   
   def _mean_shift(self, image_list):

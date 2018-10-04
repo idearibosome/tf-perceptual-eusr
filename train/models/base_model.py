@@ -77,5 +77,7 @@ class BaseModel:
     Args:
       input_list: List of the input images.
       scale: Scale to be super-resolved.
+    Returns:
+      output_list: List of the upscaled images.
     """
     raise NotImplementedError
