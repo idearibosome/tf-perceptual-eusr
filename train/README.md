@@ -18,7 +18,7 @@ You can try out our EUSR training code by running the following command:
 ```
 python train.py --data_input_path=[data_input_path] -data_truth_path=[data_truth_path] --train_path=/tmp/tf-perceptual-eusr/eusr --model=eusr --scales=2,4,8
 ```
-Please run `python train.py --helpfull` for more information.
+Please run `python train.py --model=eusr --helpfull` for more information.
 More detailed instructions will be available when our training code is further implemented.
 
 
