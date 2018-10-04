@@ -70,7 +70,7 @@ class DataLoader():
     truth_list = []
 
     for _ in range(batch_size):
-      input_patch, truth_patch = self.get_random_image_pair(scale=scale, input_patch_size=input_patch_size)
+      input_patch, truth_patch = self.get_random_image_patch_pair(scale=scale, input_patch_size=input_patch_size)
       input_list.append(input_patch)
       truth_list.append(truth_patch)
     
@@ -86,7 +86,7 @@ class DataLoader():
     return len(self.image_name_list)
   
 
-  def get_random_image_pair(self, scale, input_patch_size):
+  def get_random_image_patch_pair(self, scale, input_patch_size):
     """
     Get a random pair of input and ground-truth image patches.
     Args:
@@ -100,13 +100,13 @@ class DataLoader():
     image_index = np.random.randint(self.get_num_images())
 
     # retrieve image
-    input_patch, truth_patch = self.get_image_pair(image_index=image_index, scale=scale, input_patch_size=input_patch_size)
+    input_patch, truth_patch = self.get_image_patch_pair(image_index=image_index, scale=scale, input_patch_size=input_patch_size)
     
     # finalize
     return input_patch, truth_patch
 
 
-  def get_image_pair(self, image_index, scale, input_patch_size):
+  def get_image_patch_pair(self, image_index, scale, input_patch_size):
     """
     Get a pair of input and ground-truth image patches for given image index.
     Args:
