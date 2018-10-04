@@ -117,7 +117,7 @@ class DataLoader():
       A tuple of (input image patch, ground-truth image patch).
     """
     # retrieve image
-    input_image, truth_image = self.get_image_pair(image_index=image_index, scale=scale)
+    input_image, truth_image, _ = self.get_image_pair(image_index=image_index, scale=scale)
 
     # randomly crop
     truth_patch_size = input_patch_size * scale
@@ -151,7 +151,7 @@ class DataLoader():
       image_index: Index of the image to be retrieved. Should be in [0, get_num_images()-1].
       scale: Scale of the input image.
     Returns:
-      A tuple of (input image, ground-truth image).
+      A tuple of (input image, ground-truth image, image_name).
     """
     # retrieve image
     image_name = self.image_name_list[image_index]
@@ -159,7 +159,7 @@ class DataLoader():
     truth_image = self._get_truth_image(image_name)
 
     # finalize
-    return input_image, truth_image
+    return input_image, truth_image, image_name
 
 
   def _get_input_image(self, scale, image_name):
