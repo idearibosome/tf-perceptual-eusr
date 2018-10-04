@@ -1,3 +1,4 @@
+import argparse
 import importlib
 import json
 import os
@@ -30,6 +31,13 @@ if __name__ == '__main__':
   tf.flags.DEFINE_string('restore_target', None, 'Target of the restoration.')
   tf.flags.DEFINE_integer('global_step', 0, 'Initial global step. Specify this to resume the training.')
 
+  # parse model first and import it
+  pre_parser = argparse.ArgumentParser(add_help=False)
+  pre_parser.add_argument('--model')
+  pre_parsed = pre_parser.parse_known_args()[0]
+  if (pre_parsed.model is not None):
+    MODEL_MODULE = importlib.import_module('models.' + pre_parsed.model)
+
 
 def main(unused_argv):
   # initialize
@@ -43,8 +51,7 @@ def main(unused_argv):
   dataloader.prepare()
 
   # model
-  model_module = importlib.import_module('models.' + FLAGS.model)
-  model = model_module.create_model()
+  model = MODEL_MODULE.create_model()
   model.prepare(is_training=True, global_step=FLAGS.global_step)
 
   # model > restore
