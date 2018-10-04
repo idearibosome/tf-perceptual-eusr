@@ -70,14 +70,14 @@ class DataLoader():
     truth_list = []
 
     for _ in range(batch_size):
-      input_patch, truth_patch = self.get_image_pair(scale=scale, input_patch_size=input_patch_size)
+      input_patch, truth_patch = self.get_random_image_pair(scale=scale, input_patch_size=input_patch_size)
       input_list.append(input_patch)
       truth_list.append(truth_patch)
     
     return input_list, truth_list
   
 
-  def get_image_pair(self, scale, input_patch_size):
+  def get_random_image_pair(self, scale, input_patch_size):
     """
     Get a random pair of input and ground-truth image patches.
     Args:
