@@ -11,11 +11,13 @@ from dataloader import DataLoader
 
 FLAGS = tf.flags.FLAGS
 
+DEFAULT_MODEL = 'base_model'
+
 if __name__ == '__main__':
   tf.flags.DEFINE_integer('batch_size', 16, 'Size of the batches for each training step.')
   tf.flags.DEFINE_integer('input_patch_size', 48, 'Size of each input image patch.')
 
-  tf.flags.DEFINE_string('model', 'base_model', 'Name of the model.')
+  tf.flags.DEFINE_string('model', DEFAULT_MODEL, 'Name of the model.')
   tf.flags.DEFINE_string('scales', '2,4,8', 'Scales of the input images. Use the \',\' character to specify multiple scales (e.g., 2,4,8).')
   tf.flags.DEFINE_string('cuda_device', '0', 'CUDA device index to be used in training. This parameter may be set to the environment variable \'CUDA_VISIBLE_DEVICES\'. Specify it as -1 to disable GPUs.')
 
@@ -33,7 +35,7 @@ if __name__ == '__main__':
 
   # parse model first and import it
   pre_parser = argparse.ArgumentParser(add_help=False)
-  pre_parser.add_argument('--model')
+  pre_parser.add_argument('--model', default=DEFAULT_MODEL)
   pre_parsed = pre_parser.parse_known_args()[0]
   if (pre_parsed.model is not None):
     MODEL_MODULE = importlib.import_module('models.' + pre_parsed.model)
