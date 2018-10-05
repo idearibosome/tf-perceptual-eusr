@@ -23,7 +23,6 @@ More detailed instructions will be available when our training code is further i
 
 
 ## TODO
-- Validating the trained model
 - Freezing the trained model
 - Training qualitative score predictors
 - Training the 4PP-EUSR model
