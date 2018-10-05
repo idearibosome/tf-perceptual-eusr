@@ -6,17 +6,19 @@ import time
 
 import tensorflow as tf
 
+import dataloaders
 import models
-from dataloader import DataLoader
 
 FLAGS = tf.flags.FLAGS
 
+DEFAULT_DATALOADER = 'basic_loader'
 DEFAULT_MODEL = 'base_model'
 
 if __name__ == '__main__':
   tf.flags.DEFINE_integer('batch_size', 16, 'Size of the batches for each training step.')
   tf.flags.DEFINE_integer('input_patch_size', 48, 'Size of each input image patch.')
 
+  tf.flags.DEFINE_string('dataloader', DEFAULT_DATALOADER, 'Name of the data loader.')
   tf.flags.DEFINE_string('model', DEFAULT_MODEL, 'Name of the model.')
   tf.flags.DEFINE_string('scales', '2,4,8', 'Scales of the input images. Use the \',\' character to specify multiple scales (e.g., 2,4,8).')
   tf.flags.DEFINE_string('cuda_device', '0', 'CUDA device index to be used in training. This parameter may be set to the environment variable \'CUDA_VISIBLE_DEVICES\'. Specify it as -1 to disable GPUs.')
@@ -33,10 +35,13 @@ if __name__ == '__main__':
   tf.flags.DEFINE_string('restore_target', None, 'Target of the restoration.')
   tf.flags.DEFINE_integer('global_step', 0, 'Initial global step. Specify this to resume the training.')
 
-  # parse model first and import it
+  # parse data loader and model first and import them
   pre_parser = argparse.ArgumentParser(add_help=False)
+  pre_parser.add_argument('--dataloader', default=DEFAULT_DATALOADER)
   pre_parser.add_argument('--model', default=DEFAULT_MODEL)
   pre_parsed = pre_parser.parse_known_args()[0]
+  if (pre_parsed.dataloader is not None):
+    DATALOADER_MODULE = importlib.import_module('dataloaders.' + pre_parsed.dataloader)
   if (pre_parsed.model is not None):
     MODEL_MODULE = importlib.import_module('models.' + pre_parsed.model)
 
@@ -49,7 +54,7 @@ def main(unused_argv):
   tf.gfile.MakeDirs(FLAGS.train_path)
 
   # data loader
-  dataloader = DataLoader(scale_list=scale_list)
+  dataloader = DATALOADER_MODULE.create_loader()
   dataloader.prepare()
 
   # model
@@ -84,7 +89,7 @@ def main(unused_argv):
     start_time = time.time()
 
     scale = model.get_next_train_scale()
-    input_list, truth_list = dataloader.get_batch(batch_size=FLAGS.batch_size, scale=scale, input_patch_size=FLAGS.input_patch_size)
+    input_list, truth_list = dataloader.get_patch_batch(batch_size=FLAGS.batch_size, scale=scale, input_patch_size=FLAGS.input_patch_size)
     loss, summary = model.train_step(input_list=input_list, scale=scale, truth_list=truth_list, with_summary=with_summary)
 
     duration = time.time() - start_time

@@ -3,27 +3,24 @@ import os
 import numpy as np
 import tensorflow as tf
 
+from dataloaders.base_loader import BaseLoader
+
 FLAGS = tf.flags.FLAGS
 
 tf.flags.DEFINE_string('data_input_path', 'LR', 'Base path of the input images. For example, if you specify this argument to \'LR\', the downscaled images by a factor of 4 should be in \'LR/x4/\'.')
 tf.flags.DEFINE_string('data_truth_path', 'HR', 'Base path of the ground-truth images. The image name should be the same as that of the input (downscaled) image.')
 tf.flags.DEFINE_bool('data_cached', False, 'If true, cache the data on the memory.')
 
-class DataLoader():
+def create_loader():
+  return BasicLoader()
 
-  def __init__(self, scale_list):
-    """
-    Initialize a data loader.
-    Args:
-      scale_list: A list of scales.
-    """
-    self.scale_list = scale_list
+class BasicLoader(BaseLoader):
+  def __init__(self):
+    super().__init__()
 
 
   def prepare(self):
-    """
-    Prepare the data loader.
-    """
+    self.scale_list = list(map(lambda x: int(x), FLAGS.scales.split(',')))
 
     # retrieve image name list
     scale = self.scale_list[0]
@@ -53,19 +50,12 @@ class DataLoader():
       self.cached_input_image_list[scale] = {}
     self.cached_truth_image_list = {}
   
-  
-  def get_batch(self, batch_size, scale, input_patch_size):
-    """
-    Get a batch of input and ground-truth image patches.
-    Args:
-      batch_size: The number of image patches.
-      scale: Scale of the input image patches.
-      input_patch_size: Size of the input image patches.
-    Returns:
-      input_list: A list of input image patches.
-      truth_list: A list of ground-truth image patches.
-    """
 
+  def get_num_images(self):
+    return len(self.image_name_list)
+  
+  
+  def get_patch_batch(self, batch_size, scale, input_patch_size):
     input_list = []
     truth_list = []
 
@@ -77,25 +67,7 @@ class DataLoader():
     return input_list, truth_list
   
 
-  def get_num_images(self):
-    """
-    Get the number of images.
-    Returns:
-      The number of images.
-    """
-    return len(self.image_name_list)
-  
-
   def get_random_image_patch_pair(self, scale, input_patch_size):
-    """
-    Get a random pair of input and ground-truth image patches.
-    Args:
-      scale: Scale of the input image patch.
-      input_patch_size: Size of the input image patch.
-    Returns:
-      A tuple of (input image patch, ground-truth image patch).
-    """
-
     # select an image
     image_index = np.random.randint(self.get_num_images())
 
@@ -107,15 +79,6 @@ class DataLoader():
 
 
   def get_image_patch_pair(self, image_index, scale, input_patch_size):
-    """
-    Get a pair of input and ground-truth image patches for given image index.
-    Args:
-      image_index: Index of the image to be retrieved. Should be in [0, get_num_images()-1].
-      scale: Scale of the input image patch.
-      input_patch_size: Size of the input image patch.
-    Returns:
-      A tuple of (input image patch, ground-truth image patch).
-    """
     # retrieve image
     input_image, truth_image, _ = self.get_image_pair(image_index=image_index, scale=scale)
 
@@ -145,14 +108,6 @@ class DataLoader():
   
 
   def get_image_pair(self, image_index, scale):
-    """
-    Get a pair of input and ground-truth images for given image index.
-    Args:
-      image_index: Index of the image to be retrieved. Should be in [0, get_num_images()-1].
-      scale: Scale of the input image.
-    Returns:
-      A tuple of (input image, ground-truth image, image_name).
-    """
     # retrieve image
     image_name = self.image_name_list[image_index]
     input_image = self._get_input_image(scale, image_name)

@@ -6,14 +6,16 @@ import time
 import numpy as np
 import tensorflow as tf
 
+import dataloaders
 import models
-from dataloader import DataLoader
 
 FLAGS = tf.flags.FLAGS
 
+DEFAULT_DATALOADER = 'basic_loader'
 DEFAULT_MODEL = 'base_model'
 
 if __name__ == '__main__':
+  tf.flags.DEFINE_string('dataloader', DEFAULT_DATALOADER, 'Name of the data loader.')
   tf.flags.DEFINE_string('model', DEFAULT_MODEL, 'Name of the model.')
   tf.flags.DEFINE_string('scales', '2,4,8', 'Scales of the input images. Use the \',\' character to specify multiple scales (e.g., 2,4,8).')
   tf.flags.DEFINE_string('cuda_device', '-1', 'CUDA device index to be used in the validation. This parameter may be set to the environment variable \'CUDA_VISIBLE_DEVICES\'. Specify this to employ GPUs.')
@@ -26,10 +28,13 @@ if __name__ == '__main__':
 
   tf.flags.DEFINE_integer('shave_size', 4, 'Amount of pixels to crop the borders of the images before calculating quality metrics.')
 
-  # parse model first and import it
+  # parse data loader and model first and import them
   pre_parser = argparse.ArgumentParser(add_help=False)
+  pre_parser.add_argument('--dataloader', default=DEFAULT_DATALOADER)
   pre_parser.add_argument('--model', default=DEFAULT_MODEL)
   pre_parsed = pre_parser.parse_known_args()[0]
+  if (pre_parsed.dataloader is not None):
+    DATALOADER_MODULE = importlib.import_module('dataloaders.' + pre_parsed.dataloader)
   if (pre_parsed.model is not None):
     MODEL_MODULE = importlib.import_module('models.' + pre_parsed.model)
 
@@ -62,7 +67,7 @@ def main(unused_argv):
   tf.logging.set_verbosity(tf.logging.INFO)
 
   # data loader
-  dataloader = DataLoader(scale_list=scale_list)
+  dataloader = DATALOADER_MODULE.create_loader()
   dataloader.prepare()
 
   # model
