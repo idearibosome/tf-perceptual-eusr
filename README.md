@@ -11,6 +11,8 @@ Our method **won the 2nd place and got the highest human opinion score for Regio
 
 Followings are the performance comparison evaluated on the [BSD100](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/) dataset.
 
+![BSD100 PSNR vs. NIQE](figures/bsd100_psnr_niqe.png)
+
 Method | PSNR (dB) (↓) | Perceptual Index
 ------------ | :---: | :---:
 [EDSR](https://github.com/thstkdgus35/EDSR-PyTorch) | 27.796 | 5.326
