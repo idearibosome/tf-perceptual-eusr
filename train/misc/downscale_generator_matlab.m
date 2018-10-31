@@ -5,6 +5,10 @@ function downscale_generator_matlab(input_path, output_path, scale)
 % output_path - Base path of the output (downscaled) images.
 % scale - Downscaling factor.
 
+if (~exist(output_path, 'dir'))
+    mkdir(output_path);
+end
+
 image_list = dir([input_path, '/*.png']);
 num_images = length(image_list);
 
