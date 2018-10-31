@@ -57,8 +57,8 @@ The EUSR model is implemented and refactored from its [official TensorFlow-based
 Here is an example command to train the EUSR model:
 ```
 python train.py
-  --data_input_path=/tmp/DIV2K/train/HR
-  --data_truth_path=/tmp/DIV2K/train/LR
+  --data_input_path=/tmp/DIV2K/train/LR
+  --data_truth_path=/tmp/DIV2K/train/HR
   --train_path=/tmp/tf-perceptual-eusr/eusr
   --model=eusr
   --scales=2,4,8
@@ -75,8 +75,8 @@ You can also validate the trained model by ```validate.py```.
 For example, if you want to evaluate the model saved at step 50000, run
 ```
 python validate.py
-  --data_input_path=/tmp/DIV2K/validate/HR
-  --data_truth_path=/tmp/DIV2K/validate/LR
+  --data_input_path=/tmp/DIV2K/validate/LR
+  --data_truth_path=/tmp/DIV2K/validate/HR
   --model=eusr
   --scales=2,4,8
   --restore_path=/tmp/tf-perceptual-eusr/eusr/model.ckpt-50000
