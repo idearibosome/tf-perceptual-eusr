@@ -86,7 +86,7 @@ It will print out the PSNR and RMSE values of the upscaled images with saving th
 Please run `python validate.py --model=eusr --helpfull` for more information.
 
 ※ Note that the calculated PSNR and RMSE values may differ from the the values in our paper, due to the different calculation methods.
-The code in this repository calculates PSNR and RMSE values from R, G, and B channels, while the measures reported in the paper were measured from Y channel of the YCbCr color space.
+The code in this repository calculates PSNR and RMSE values from R, G, and B channels, while the measures reported in the paper were obtained from Y channel of the YCbCr color space.
 
 
 ## TODO
