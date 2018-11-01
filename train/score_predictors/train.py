@@ -17,7 +17,6 @@ DEFAULT_MODEL = 'mobilenetv2'
 if __name__ == '__main__':
   tf.flags.DEFINE_integer('input_patch_size', 192, 'Size of each input image patch.')
 
-  tf.flags.DEFINE_boolean('last_only', False, 'Set this argument to train the last layer only.')
   tf.flags.DEFINE_integer('batch_size', 128, 'Size of the batches for each training step.')
   tf.flags.DEFINE_integer('epochs', 5, 'The number of total epochs.')
   tf.flags.DEFINE_float('learning_rate', 1e-3, 'Learning rate.')
@@ -53,7 +52,7 @@ def main(unused_argv):
 
   # model
   model = MODEL_MODULE.create_model()
-  model.prepare(is_training=True, last_only=FLAGS.last_only)
+  model.prepare(is_training=True, input_size=FLAGS.input_patch_size)
 
   # model > restore
   if (FLAGS.restore_path is not None):

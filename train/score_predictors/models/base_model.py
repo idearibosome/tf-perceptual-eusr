@@ -10,11 +10,12 @@ class BaseModel:
   def __init__(self):
     pass
 
-  def prepare(self, is_training):
+  def prepare(self, is_training, input_size):
     """
     Prepare the model to be used. This function should be called before calling any other functions.
     Args:
       is_training: A boolean that specifies whether the model is for training or not.
+      input_size: Size of the input images.
     """
     raise NotImplementedError
   
