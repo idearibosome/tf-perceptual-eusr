@@ -67,7 +67,7 @@ def main(unused_argv):
   # train
   save_path = os.path.join(FLAGS.train_path, FLAGS.weight_filename)
   model.train(
-    train_generator=dataloader.generator(is_training=True, batch_size=FLAGS.batch_size, patch_size=input_patch_size)
+    train_generator=dataloader.generator(is_training=True, batch_size=FLAGS.batch_size, patch_size=input_patch_size),
     train_steps=(dataloader.get_num_training_data() // FLAGS.batch_size),
     train_epochs=FLAGS.epochs,
     validate_generator=dataloader.generator(is_training=False, batch_size=FLAGS.batch_size, patch_size=input_patch_size),
