@@ -17,7 +17,7 @@ DEFAULT_MODEL = 'mobilenetv2'
 if __name__ == '__main__':
   tf.flags.DEFINE_integer('input_patch_size', 192, 'Size of each input image patch.')
 
-  tf.flags.DEFINE_integer('batch_size', 128, 'Size of the batches for each training step.')
+  tf.flags.DEFINE_integer('batch_size', 32, 'Size of the batches for each training step.')
   tf.flags.DEFINE_integer('epochs', 5, 'The number of total epochs.')
   tf.flags.DEFINE_float('learning_rate', 1e-3, 'Learning rate.')
 
