@@ -93,7 +93,7 @@ def main(unused_argv):
     loss, summary = model.train_step(input_list=input_list, scale=scale, truth_list=truth_list, with_summary=with_summary)
 
     duration = time.time() - start_time
-    if (FLAGS.sleep_ratio > 0):
+    if (FLAGS.sleep_ratio > 0 and duration > 0):
       time.sleep(min(1.0, duration*FLAGS.sleep_ratio))
 
     if (local_train_step % FLAGS.log_freq == 0):
