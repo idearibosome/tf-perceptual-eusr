@@ -94,6 +94,7 @@ Our model requires two qualitative score predictors, which are trained on the [A
 You can train the score predictors manually with the provided code, or skip it and use our pre-trained predictors. [Download coming soon]
 
 The training code in ```score_predictors/``` is based on Keras in TensorFlow.
+It is basically a refactored and modified version of [https://github.com/titu1994/neural-image-assessment](https://github.com/titu1994/neural-image-assessment).
 To train the models, you need TensorFlow 1.12+, since the MobileNetV2 model is included in that version.
 
 ### Aesthetic score predictor
