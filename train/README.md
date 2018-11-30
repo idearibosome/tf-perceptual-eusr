@@ -1,8 +1,6 @@
 # Training 4PP-EUSR
 ※ Please note that the implementation of training code for public is currently in progress.
 
-
-## Tutorial
 This tutorial demonstrates how to train a 4PP-EUSR model with the codes of this repository.
 Briefly, there are three training phases to get a 4PP-EUSR model as follows:
 - Pre-training the EUSR model
@@ -10,7 +8,7 @@ Briefly, there are three training phases to get a 4PP-EUSR model as follows:
 - Training the 4PP-EUSR model based on the pre-trained EUSR and score predictors
 
 
-### Preparing training images
+## Preparing training images
 Here, the DIV2K dataset will be used for training.
 You can download the DIV2K dataset from its [official website](https://data.vision.ee.ethz.ch/cvl/DIV2K/).
 
@@ -51,7 +49,7 @@ We also provide alternative downscaling helper scripts written in Python: ```dow
 However, please note that the downscaled results may not exactly the same as the images obtained from MATLAB.
 
 
-### Pre-training the EUSR model
+## Pre-training the EUSR model
 The EUSR model is implemented and refactored from its [official TensorFlow-based implementation](https://github.com/junhyukk/EUSR-Tensorflow).
 
 Here is an example command to train the EUSR model:
