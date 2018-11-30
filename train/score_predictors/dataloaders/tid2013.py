@@ -68,10 +68,22 @@ class TID2013Loader(BaseLoader):
     self.image_path_list = np.array(self.image_path_list)
     self.score_list = np.array(self.score_list, dtype='float32')
 
-    self.train_ranges[0] = max(self.train_ranges[0], 0)
+    self.train_ranges[0] = min(self.train_ranges[0], self.score_list.shape[0])
+    self.train_ranges[0] = max(self.train_ranges[0], -self.score_list.shape[0])
+    if (self.train_ranges[0] == 0):
+      self.train_ranges[0] = None
     self.train_ranges[1] = min(self.train_ranges[1], self.score_list.shape[0])
-    self.validate_ranges[0] = max(self.validate_ranges[0], 0)
+    self.train_ranges[1] = max(self.train_ranges[1], -self.score_list.shape[0])
+    if (self.train_ranges[1] == 0):
+      self.train_ranges[1] = None
+    self.validate_ranges[0] = min(self.validate_ranges[0], self.score_list.shape[0])
+    self.validate_ranges[0] = max(self.validate_ranges[0], -self.score_list.shape[0])
+    if (self.validate_ranges[0] == 0):
+      self.validate_ranges[0] = None
     self.validate_ranges[1] = min(self.validate_ranges[1], self.score_list.shape[0])
+    self.validate_ranges[1] = max(self.validate_ranges[1], -self.score_list.shape[0])
+    if (self.validate_ranges[1] == 0):
+      self.validate_ranges[1] = None
     
 
     # divide train/validate set
