@@ -37,7 +37,7 @@ class TID2013Loader(BaseLoader):
     self.image_path_dict = {}
     for root, _, files in os.walk(FLAGS.tid2013_image_path):
       for filename in files:
-        if (filename.endswith('.' + FLAGS.tid2013_image_extension)):
+        if (filename.lower().endswith('.' + FLAGS.tid2013_image_extension)):
           image_name = filename.split('.')[0]
           image_path = os.path.join(root, filename)
           self.image_path_dict[image_name] = image_path
