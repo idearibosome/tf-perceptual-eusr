@@ -89,7 +89,45 @@ Please run `python validate.py --model=eusr --helpfull` for more information.
 The code in this repository calculates PSNR and RMSE values from R, G, and B channels, while the measures reported in the paper were obtained from Y channel of the YCbCr color space.
 
 
+## Training qualitative score predictors
+Our model requires two qualitative score predictors, which are trained on the [AVA](https://ieeexplore.ieee.org/document/6247954) and [TID2013](http://www.ponomarenko.info/tid2013.htm) datasets.
+You can train the score predictors manually with the provided code, or skip it and use our pre-trained predictors. [Download coming soon]
+
+The training code in ```score_predictors/``` is based on Keras in TensorFlow.
+To train the models, you need TensorFlow 1.12+, since the MobileNetV2 model is included in that version.
+
+### Aesthetic score predictor
+Coming soon
+
+### Subjective score predictor
+The subjecitve score predictor can be trained on the TID2013 dataset.
+
+- Download and extract the distorted images.
+- Run the following code to train the last layer of MobileNetV2, which produces ```tid2013_lastonly.h5```:
+```
+python train.py
+  --dataloader=tid2013
+  --tid2013_image_path=<path of the distorted images>
+  --mobilenetv2_train_last_only
+  --batch_size=128
+  --epochs=100
+  --learning_rate=0.001
+  --weight_filename=tid2013_lastonly.h5
+```
+- Run the following code to fine-tune all the layers, which produces ```tid2013.h5```:
+```
+python train.py
+  --dataloader=tid2013
+  --tid2013_image_path=<path of the distorted images>
+  --batch_size=32
+  --epochs=100
+  --learning_rate=0.00001
+  --weight_filename=tid2013.h5
+  --restore_path=tid2013_lastonly.h5
+```
+
+
 ## TODO
 - Freezing the trained model
-- Training qualitative score predictors
+- Training qualitative score predictors (in progress)
 - Training the 4PP-EUSR model
