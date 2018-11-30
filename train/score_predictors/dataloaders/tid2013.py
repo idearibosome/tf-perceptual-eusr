@@ -11,7 +11,7 @@ FLAGS = tf.flags.FLAGS
 tf.flags.DEFINE_string('tid2013_score_path', 'tid2013_name_mos_std.txt', 'Path of the TID2013 score data (name, mean, and standard deviation).')
 tf.flags.DEFINE_string('tid2013_image_path', None, 'Path of the distorted TID2013 images.')
 tf.flags.DEFINE_string('tid2013_image_extension', 'bmp', 'Extension of the distorted TID2013 images (either bmp or png).')
-tf.flags.DEFINE_string('tid2013_train_range', '360,2500', 'Range of indices of the training images.')
+tf.flags.DEFINE_string('tid2013_train_range', '360,3000', 'Range of indices of the training images.')
 tf.flags.DEFINE_string('tid2013_validate_range', '0,360', 'Range of indices of the validation images.')
 tf.flags.DEFINE_integer('tid2013_num_threads', 4, 'The number of threads to retrieve image (i.e., num_parallel_calls in tf.data.Dataset.map).')
 
