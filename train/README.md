@@ -122,7 +122,7 @@ python train.py
   --epochs=100
   --learning_rate=0.00001
   --weight_filename=tid2013.h5
-  --restore_path=tid2013_lastonly.h5
+  --restore_path=train/tid2013_lastonly.h5
 ```
 
 
