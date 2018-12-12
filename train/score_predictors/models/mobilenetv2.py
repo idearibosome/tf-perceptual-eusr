@@ -30,7 +30,11 @@ class MobileNetV2(BaseModel):
       x = tf.keras.layers.Dropout(0.75)(x)
     x = tf.keras.layers.Dense(10, activation='softmax')(x)
 
-    self.model = tf.keras.models.Model(base_model.input, x)
+    if (is_training):
+      self.model = tf.keras.models.Model(base_model.input, x)
+    else:
+      x_features = base_model.layers[-1].output
+      self.model = tf.keras.models.Model(base_model.input, [x, x_features])
     self.model.summary()
 
     if (is_training):
@@ -39,6 +43,27 @@ class MobileNetV2(BaseModel):
   
   def restore(self, restore_path):
     self.model.load_weights(restore_path)
+  
+  def freeze(self, freeze_path):
+    output_node_names = []
+
+    tf.logging.info('- input node name: %s' % (self.model.inputs[0].name))
+
+    output_scores = self.model.outputs[0]
+    output_scores = tf.identity(output_scores, BaseModel.MODEL_OUTPUT_SCORES_NAME)
+    tf.logging.info('- output scores node name: %s' % (output_scores.name))
+    output_node_names.append(BaseModel.MODEL_OUTPUT_SCORES_NAME)
+
+    output_features = self.model.outputs[1]
+    output_features = tf.identity(output_features, BaseModel.MODEL_OUTPUT_FEATURES_NAME)
+    tf.logging.info('- output features node name: %s' % (output_features.name))
+    output_node_names.append(BaseModel.MODEL_OUTPUT_FEATURES_NAME)
+
+    sess = tf.keras.backend.get_session()
+    constant_graph = tf.graph_util.convert_variables_to_constants(sess, sess.graph.as_graph_def(), output_node_names)
+
+    path_dir, path_name = os.path.split(freeze_path)
+    tf.train.write_graph(constant_graph, path_dir, path_name, as_text=False)
   
   def train(self, train_generator, train_steps, train_epochs, validate_generator, validate_steps, save_path):
     self.checkpoint = tf.keras.callbacks.ModelCheckpoint(save_path, monitor='val_loss', mode='min', save_weights_only=True, save_best_only=False, verbose=1)
