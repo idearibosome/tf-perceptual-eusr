@@ -17,7 +17,7 @@ if __name__ == '__main__':
   tf.flags.DEFINE_string('model', DEFAULT_MODEL, 'Name of the model.')
   tf.flags.DEFINE_integer('input_patch_size', 192, 'Size of each input image patch.')
   tf.flags.DEFINE_string('restore_path', 'score_predictor.h5', 'Model path to be restored.')
-  tf.flags.DEFINE_string('output_path', 'score_predictor_freezed.pb', 'Model path to be saved.')
+  tf.flags.DEFINE_string('output_path', 'score_predictor_frozen.pb', 'Model path to be saved.')
 
   # parse data loader and model first and import them
   pre_parser = argparse.ArgumentParser(add_help=False)
@@ -43,7 +43,7 @@ def main(unused_argv):
 
   # freeze
   model.freeze(freeze_path=FLAGS.output_path)
-  tf.logging.info('freezed and saved the model')
+  tf.logging.info('froze and saved the model')
     
   # finalize
   tf.logging.info('finished')

@@ -34,7 +34,7 @@ class BaseModel:
     """
     Freeze the model.
     Args:
-      freeze_path: Path of the freezed model file to be saved.
+      freeze_path: Path of the frozen model file to be saved.
     """
     raise NotImplementedError
 
