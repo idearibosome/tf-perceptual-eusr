@@ -124,6 +124,12 @@ python train.py
   --weight_filename=tid2013.h5
   --restore_path=train/tid2013_lastonly.h5
 ```
+- Freeze the model to be used in training the 4PP-EUSR model:
+```
+python freeze.py
+  --restore_path=train/tid2013.h5
+  --output_path=train/tid2013.pb
+```
 
 
 ## TODO
