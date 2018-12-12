@@ -111,6 +111,7 @@ python train.py
   --batch_size=128
   --epochs=100
   --learning_rate=0.001
+  --train_path=train
   --weight_filename=tid2013_lastonly.h5
 ```
 - Run the following code to fine-tune all the layers, which produces ```tid2013.h5```:
@@ -121,6 +122,7 @@ python train.py
   --batch_size=32
   --epochs=100
   --learning_rate=0.00001
+  --train_path=train
   --weight_filename=tid2013.h5
   --restore_path=train/tid2013_lastonly.h5
 ```
