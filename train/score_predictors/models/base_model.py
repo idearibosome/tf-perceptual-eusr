@@ -7,6 +7,9 @@ def create_model():
 
 class BaseModel:
 
+  MODEL_OUTPUT_SCORES_NAME = 'output_scores'
+  MODEL_OUTPUT_FEATURES_NAME = 'output_features'
+
   def __init__(self):
     pass
 
@@ -24,6 +27,14 @@ class BaseModel:
     Restore parameters of the model.
     Args:
       restore_path: Path of the weight file to be restored.
+    """
+    raise NotImplementedError
+  
+  def freeze(self, freeze_path):
+    """
+    Freeze the model.
+    Args:
+      freeze_path: Path of the freezed model file to be saved.
     """
     raise NotImplementedError
 
