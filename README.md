@@ -69,8 +69,8 @@ Please refer to [README.md on the `train/` folder](train/) for more information.
 ## Downloads
 Pre-trained models:
 - PIRM Challenge version: [4pp_eusr_pirm.pb](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_pirm.pb)
-- Paper version: [4pp_eusr_paper.pb](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_paper.pb)
+- Paper version (v2): [4pp_eusr_paper_v2.pb](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_paper_v2.pb)
 
 Results (Set5, Set14, BSD100, PIRM):
 - PIRM Challenge version: [4pp_eusr_results_pirm.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_pirm.zip)
-- Paper version: [4pp_eusr_results_paper.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_paper.zip)
+- Paper version (v2): [4pp_eusr_results_paper_v2.zip](http://mcml.yonsei.ac.kr/files/4pp_eusr/4pp_eusr_results_paper_v2.zip)
