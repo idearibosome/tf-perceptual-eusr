@@ -5,7 +5,7 @@ This tutorial demonstrates how to train a 4PP-EUSR model with the codes of this 
 Briefly, there are three training phases to get a 4PP-EUSR model as follows:
 - Pre-training the EUSR model
 - Training aesthetic and subjective qualitative score predictors
-- Training the 4PP-EUSR model based on the pre-trained EUSR and score predictors
+- Training the 4PP-EUSR model based on the pre-trained EUSR and with employing the score predictors
 
 
 ## Preparing training images
