@@ -89,7 +89,9 @@ The code in this repository calculates PSNR and RMSE values from R, G, and B cha
 
 ## Training qualitative score predictors
 Our model requires two qualitative score predictors, which are trained on the [AVA](https://ieeexplore.ieee.org/document/6247954) and [TID2013](http://www.ponomarenko.info/tid2013.htm) datasets.
-You can train the score predictors manually with the provided code, or skip it and use our pre-trained predictors. [Download coming soon]
+You can train the score predictors manually with the provided code, or skip it and use our pre-trained predictors.
+- [Aesthetic score predictor (score_predictor_ava.pb)](http://mcml.yonsei.ac.kr/files/4pp_eusr/score_predictor_ava.pb)
+- [Subjective score predictor (score_predictor_tid2013.pb)](http://mcml.yonsei.ac.kr/files/4pp_eusr/score_predictor_tid2013.pb)
 
 The training code in ```score_predictors/``` is based on Keras in TensorFlow.
 It is basically a refactored and modified version of [https://github.com/titu1994/neural-image-assessment](https://github.com/titu1994/neural-image-assessment).
