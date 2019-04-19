@@ -96,7 +96,45 @@ It is basically a refactored and modified version of [https://github.com/titu199
 To train the models, you need TensorFlow 1.11+, since the MobileNetV2 model is included in that version.
 
 ### Aesthetic score predictor
-Coming soon
+The aesthetic score predictor can be trained on the AVA dataset.
+
+- Download and extract the AVA dataset. The dataset should contain ```AVA.txt```, which has both the image ids and scores.
+- Prepare the original images of the AVA dataset.
+- Run the following code to train the last layer of MobileNetV2, which produces ```ava_lastonly.h5```:
+```
+python train.py
+  --dataloader=ava
+  --ava_dataset_path=<path of AVA.txt>
+  --ava_image_path=<path of the images>
+  --mobilenetv2_train_last_only
+  --batch_size=128
+  --epochs=5
+  --learning_rate=0.001
+  --train_path=train
+  --weight_filename=ava_lastonly.h5
+```
+- Notes:
+  - The data loader may search all jpg files in ```--ava_image_path``` recursively.
+  - The data loader assumes that all the image files are not corrupted. If some image files are corrupted, manually remove the corrupted files or specify ```--ava_validate_images```. However, training with the ```--ava_validate_images``` option may take a while because it tries to read all the image files to check validity.
+- Run the following code to fine-tune all the layers, which produces ```ava.h5```:
+```
+python train.py
+  --dataloader=ava
+  --ava_dataset_path=<path of AVA.txt>
+  --ava_image_path=<path of the images>
+  --batch_size=32
+  --epochs=5
+  --learning_rate=0.00001
+  --train_path=train
+  --weight_filename=ava.h5
+  --restore_path=train/ava_lastonly.h5
+```
+- Freeze the model to be used in training the 4PP-EUSR model:
+```
+python freeze.py
+  --restore_path=train/ava.h5
+  --output_path=train/ava.pb
+```
 
 ### Subjective score predictor
 The subjecitve score predictor can be trained on the TID2013 dataset.
@@ -136,5 +174,4 @@ python freeze.py
 
 ## TODO
 - Freezing the trained model
-- Training qualitative score predictors (in progress)
 - Training the 4PP-EUSR model
