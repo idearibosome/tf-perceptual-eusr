@@ -59,8 +59,7 @@ class AVALoader(BaseLoader):
             raise ValueError
           
           validated_image_path_dict[image_name] = image_path
-          if (num_validated_images % 1000 == 0):
-            print('%d' % (num_validated_images))
+
         except:
           tf.logging.info('data: invalid image %s (ignored)' % (image_name))
       
@@ -186,7 +185,7 @@ class AVALoader(BaseLoader):
 
       resize_size = tf.maximum(new_image_size, patch_size)
       image = tf.image.resize_images(image, (resize_size, resize_size))
-      
+
       image = tf.image.resize_image_with_crop_or_pad(image, patch_size, patch_size)
     
     image = (tf.cast(image, tf.float32) - 127.5) / 127.5
