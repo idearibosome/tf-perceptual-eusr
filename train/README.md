@@ -206,6 +206,6 @@ python validate.py
   --data_truth_path=/tmp/DIV2K/validate/HR
   --model=4pp_eusr
   --scales=4
-  --restore_path=/tmp/tf-perceptual-eusr/4pp_eusr/model.ckpt-50000
+  --restore_path=/tmp/tf-perceptual-eusr/4pp-eusr/model.ckpt-50000
   --save_path=/tmp/tf-perceptual-eusr/4pp_eusr/results
 ```
