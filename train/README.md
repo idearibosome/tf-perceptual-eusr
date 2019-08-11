@@ -1,6 +1,4 @@
 # Training 4PP-EUSR
-※ Please note that the implementation of training code for public is currently in progress.
-
 This tutorial demonstrates how to train a 4PP-EUSR model with the codes of this repository.
 Briefly, there are three training phases to get a 4PP-EUSR model as follows:
 - Pre-training the EUSR model
@@ -53,7 +51,7 @@ However, please note that the downscaled results may not exactly the same as the
 The EUSR model is implemented and refactored from its [official TensorFlow-based implementation](https://github.com/junhyukk/EUSR-Tensorflow).
 
 Here is an example command to train the EUSR model:
-```
+```script
 python train.py
   --data_input_path=/tmp/DIV2K/train/LR
   --data_truth_path=/tmp/DIV2K/train/HR
@@ -65,13 +63,13 @@ You can also change other parameters, e.g., the maximum number of training steps
 Please run `python train.py --model=eusr --helpfull` for more information.
 
 During the training, you can view the current training status via TensorBoard, e.g.,
-```
+```script
 tensorboard --logdir=/tmp/tf-perceptual-eusr/eusr
 ```
 
 You can also validate the trained model by ```validate.py```.
 For example, if you want to evaluate the model saved at step 50000, run
-```
+```script
 python validate.py
   --data_input_path=/tmp/DIV2K/validate/LR
   --data_truth_path=/tmp/DIV2K/validate/HR
@@ -103,7 +101,7 @@ The aesthetic score predictor can be trained on the AVA dataset.
 - Download and extract the AVA dataset. The dataset should contain ```AVA.txt```, which has both the image ids and scores.
 - Prepare the original images of the AVA dataset.
 - Run the following code to train the last layer of MobileNetV2, which produces ```ava_lastonly.h5```:
-```
+```script
 python train.py
   --dataloader=ava
   --ava_dataset_path=<path of AVA.txt>
@@ -119,7 +117,7 @@ python train.py
   - The data loader may search all jpg files in ```--ava_image_path``` recursively.
   - The data loader assumes that all the image files are not corrupted. If some image files are corrupted, manually remove the corrupted files or specify ```--ava_validate_images```. However, training with the ```--ava_validate_images``` option may take a while because it tries to read all the image files to check validity.
 - Run the following code to fine-tune all the layers, which produces ```ava.h5```:
-```
+```script
 python train.py
   --dataloader=ava
   --ava_dataset_path=<path of AVA.txt>
@@ -132,7 +130,7 @@ python train.py
   --restore_path=train/ava_lastonly.h5
 ```
 - Freeze the model to be used in training the 4PP-EUSR model:
-```
+```script
 python freeze.py
   --restore_path=train/ava.h5
   --output_path=train/ava.pb
@@ -143,7 +141,7 @@ The subjecitve score predictor can be trained on the TID2013 dataset.
 
 - Download and extract the distorted images.
 - Run the following code to train the last layer of MobileNetV2, which produces ```tid2013_lastonly.h5```:
-```
+```script
 python train.py
   --dataloader=tid2013
   --tid2013_image_path=<path of the distorted images>
@@ -155,7 +153,7 @@ python train.py
   --weight_filename=tid2013_lastonly.h5
 ```
 - Run the following code to fine-tune all the layers, which produces ```tid2013.h5```:
-```
+```script
 python train.py
   --dataloader=tid2013
   --tid2013_image_path=<path of the distorted images>
@@ -167,13 +165,47 @@ python train.py
   --restore_path=train/tid2013_lastonly.h5
 ```
 - Freeze the model to be used in training the 4PP-EUSR model:
-```
+```script
 python freeze.py
   --restore_path=train/tid2013.h5
   --output_path=train/tid2013.pb
 ```
 
 
-## TODO
-- Freezing the trained model
-- Training the 4PP-EUSR model
+## Training the 4PP-EUSR model
+With the pre-trained EUSR model and two score predictors, you can train the 4PP-EUSR model with the following example command:
+```script
+python train.py
+  --data_input_path=/tmp/DIV2K/train/LR
+  --data_truth_path=/tmp/DIV2K/train/HR
+  --train_path=/tmp/tf-perceptual-eusr/4pp-eusr
+  --model=4pp_eusr
+  --scales=4
+  --batch_size=2
+  --max_steps=400000
+  --eusr_aesthetic_nima_path=score_predictor_ava.pb
+  --eusr_subjective_nima_path=score_predictor_tid2013.pb
+  --restore_path=/tmp/tf-perceptual-eusr/eusr/model.ckpt-1000000
+  --restore_target=generator
+```
+Change the parameters of the above command properly for your environment.
+
+You can also change other parameters, e.g., the learning rate and and loss weights.
+For example, specify ```--eusr_weight_lr=0``` to disable the reconstruction loss.
+Please run `python train.py --model=4pp_eusr --helpfull` for more information.
+
+The procedures to monitor the training status and validate the trained model are similar to those for the EUSR model.
+Example command of using TensorBoard:
+```
+tensorboard --logdir=/tmp/tf-perceptual-eusr/4pp_eusr
+```
+Example command of validating the trained 4PP-EUSR model:
+```
+python validate.py
+  --data_input_path=/tmp/DIV2K/validate/LR
+  --data_truth_path=/tmp/DIV2K/validate/HR
+  --model=4pp_eusr
+  --scales=4
+  --restore_path=/tmp/tf-perceptual-eusr/4pp_eusr/model.ckpt-50000
+  --save_path=/tmp/tf-perceptual-eusr/4pp_eusr/results
+```
