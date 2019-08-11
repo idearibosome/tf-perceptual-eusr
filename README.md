@@ -49,7 +49,7 @@ Please cite following papers when you use the code, pre-trained models, or resul
 
 ## Dependencies
 - Python 3.6+
-- TensorFlow 1.11+
+- TensorFlow 1.11+ (<2.0)
 
 ## Test pre-trained models
 Generating upscaled images from the trained models can be done by `test/test.py`.
@@ -62,8 +62,7 @@ Following are the brief instructions.
 
 Please run `python test.py --help` for more information.
 
-## Training 4PP-EUSR
-Implementing the training code is in progress.
+## Training EUSR, score predictors, and 4PP-EUSR
 Please refer to [README.md on the `train/` folder](train/) for more information.
 
 ## Downloads
