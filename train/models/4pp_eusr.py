@@ -380,11 +380,16 @@ class PerceptualEUSR(BaseModel):
     nima_input = tf.concat(nima_input, axis=0)
     nima_input = (tf.cast(nima_input, tf.float32) - 127.5) / 127.5
 
+
     # score predictors > aesthetic
     with tf.gfile.GFile(self.aesthetic_nima_path, 'rb') as f:
       nima_graph_def = tf.GraphDef()
       nima_graph_def.ParseFromString(f.read())
     aesthetic_scores, aesthetic_features = tf.import_graph_def(nima_graph_def, name='aesthetic_nima', input_map={'input_1:0': nima_input}, return_elements=['output_scores:0', 'output_features:0'])
+
+    aesthetic_scores = tf.multiply(aesthetic_scores, tf.lin_space(1.0, 10.0, 10))
+    aesthetic_scores = 10.0 - tf.reduce_sum(aesthetic_scores, axis=1)
+
     aesthetic_score_list = tf.split(aesthetic_scores, num_or_size_splits=len(output_list)+1, axis=0)
     truth_aesthetic_scores = aesthetic_score_list[-1]
     output_aesthetic_scores_list = aesthetic_score_list[:-1]
@@ -392,11 +397,16 @@ class PerceptualEUSR(BaseModel):
     truth_aesthetic_features = aesthetic_feature_list[-1]
     output_aesthetic_features_list = aesthetic_feature_list[:-1]
 
+
     # score predictors > subjective
     with tf.gfile.GFile(self.subjective_nima_path, 'rb') as f:
       nima_graph_def = tf.GraphDef()
       nima_graph_def.ParseFromString(f.read())
     subjective_scores, subjective_features = tf.import_graph_def(nima_graph_def, name='subjective_nima', input_map={'input_1:0': nima_input}, return_elements=['output_scores:0', 'output_features:0'])
+
+    subjective_scores = tf.multiply(subjective_scores, tf.lin_space(1.0, 10.0, 10))
+    subjective_scores = 10.0 - tf.reduce_sum(subjective_scores, axis=1)
+
     subjective_score_list = tf.split(subjective_scores, num_or_size_splits=len(output_list)+1, axis=0)
     truth_subjective_scores = subjective_score_list[-1]
     output_subjective_scores_list = subjective_score_list[:-1]
