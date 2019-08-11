@@ -51,7 +51,7 @@ Please cite following papers when you use the code, pre-trained models, or resul
 - Python 3.6+
 - TensorFlow 1.11+ (<2.0)
 
-## Test pre-trained models
+## Testing pre-trained models
 Generating upscaled images from the trained models can be done by `test/test.py`.
 Following are the brief instructions.
 
