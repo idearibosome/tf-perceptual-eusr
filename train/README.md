@@ -197,7 +197,7 @@ Please run `python train.py --model=4pp_eusr --helpfull` for more information.
 The procedures to monitor the training status and validate the trained model are similar to those for the EUSR model.
 Example command of using TensorBoard:
 ```
-tensorboard --logdir=/tmp/tf-perceptual-eusr/4pp_eusr
+tensorboard --logdir=/tmp/tf-perceptual-eusr/4pp-eusr
 ```
 Example command of validating the trained 4PP-EUSR model:
 ```
@@ -207,5 +207,5 @@ python validate.py
   --model=4pp_eusr
   --scales=4
   --restore_path=/tmp/tf-perceptual-eusr/4pp-eusr/model.ckpt-50000
-  --save_path=/tmp/tf-perceptual-eusr/4pp_eusr/results
+  --save_path=/tmp/tf-perceptual-eusr/4pp-eusr/results
 ```
