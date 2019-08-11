@@ -355,7 +355,7 @@ class PerceptualEUSR(BaseModel):
       
       with tf.variable_scope('fc'):
         x = tf.layers.flatten(x)
-        x = tf.reshape(x, [-1, 512])  # ensure the last dimension
+        x = tf.reshape(x, [-1, 512]) # ensure the last dimension
         x = tf.layers.dense(x, 1024)
         x = tf.nn.leaky_relu(x)
         
@@ -423,7 +423,7 @@ class PerceptualEUSR(BaseModel):
     self.loss_dict['recon'] = loss_r
 
 
-    # adversarial loss
+    # adversarial loss (l_g)
     loss_g = 0.0
     for each_list in output_adversarial_list:
       loss_g += tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=each_list, labels=tf.ones_like(each_list)))
