@@ -1,6 +1,8 @@
 # 4PP-EUSR
 Four-pass perceptual super-resolution with enhanced upscaling
 
+[![SRZoo](https://img.shields.io/badge/srzoo-supported-brightgreen)](https://github.com/idearibosome/srzoo)
+
 
 ## Introduction
 This repository contains a TensorFlow-based implementation of **[4PP-EUSR ("Deep learning-based image super-resolution considering quantitative and perceptual quality")](http://arxiv.org/abs/1809.04789)**, which considers both the quantitative (e.g., PSNR) and perceptual quality (e.g., NIQE) of the upscaled images.
@@ -52,6 +54,9 @@ Please cite following papers when you use the code, pre-trained models, or resul
 - TensorFlow 1.11+ (<2.0)
 
 ## Testing pre-trained models
+
+※ PIRM Challenge version is available on [SRZoo](https://github.com/idearibosome/srzoo).
+
 Generating upscaled images from the trained models can be done by `test/test.py`.
 Following are the brief instructions.
 
