@@ -30,13 +30,14 @@ Bicubic interpolation | 25.957 | 6.995
 [CX](https://arxiv.org/abs/1803.04626) | 24.581 | 2.250
 
 Please cite following papers when you use the code, pre-trained models, or results:
-- J.-H. Choi, J.-H. Kim, M. Cheon, J.-S. Lee: **Deep learning-based image super-resolution considering quantitative and perceptual quality**. arXiv:1809.04789 (2018) [[arXiv]](http://arxiv.org/abs/1809.04789)
+- J.-H. Choi, J.-H. Kim, M. Cheon, J.-S. Lee: **Deep learning-based image super-resolution considering quantitative and perceptual quality**. Neurocomputing (In Press) [[Paper]](https://doi.org/10.1016/j.neucom.2019.06.103) [[arXiv]](http://arxiv.org/abs/1809.04789)
 ```
 @article{choi2018deep,
   title={Deep learning-based image super-resolution considering quantitative and perceptual quality},
   author={Choi, Jun-Ho and Kim, Jun-Hyuk and Cheon, Manri and Lee, Jong-Seok},
-  journal={arXiv preprint arXiv:1809.04789},
-  year={2018}
+  journal={Neurocomputing},
+  year={2019},
+  publisher={Elsevier}
 }
 ```
 - J.-H. Kim, J.-S. Lee: **Deep residual network with enhanced upscaling module for super-resolution**. In: Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, pp. 913-921 (2018) [[Paper]](http://openaccess.thecvf.com/content_cvpr_2018_workshops/w13/html/Kim_Deep_Residual_Network_CVPR_2018_paper.html)
