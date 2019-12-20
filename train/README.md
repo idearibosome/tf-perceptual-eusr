@@ -209,3 +209,16 @@ python validate.py
   --restore_path=/tmp/tf-perceptual-eusr/4pp-eusr/model.ckpt-50000
   --save_path=/tmp/tf-perceptual-eusr/4pp-eusr/results
 ```
+
+
+## Freezing the trained model
+After training the model, you can "freeze" the model to test with [test.py](https://github.com/idearibosome/tf-perceptual-eusr/blob/master/test/test.py).
+
+Example command of freezing the trained 4PP-EUSR model:
+```script
+python freeze.py
+  --model=4pp_eusr
+  --scales=4
+  --restore_path=/tmp/tf-perceptual-eusr/4pp-eusr/model.ckpt-400000
+```
+After executing the above command, you may find the frozed model file, which is saved as ```model.pb```.
