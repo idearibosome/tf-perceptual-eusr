@@ -31,7 +31,21 @@ def main():
       model_graph_def = tf.GraphDef()
       model_graph_def.ParseFromString(f.read())
     
-    model_output = tf.import_graph_def(model_graph_def, name='model', input_map={'sr_input:0': image}, return_elements=['sr_output:0'])[0]
+    
+    # add a workaround to support frozen models having input scale as a placeholder
+    model_output = None
+    if (model_output is None):
+      try:
+        model_input_scale = tf.constant(4, dtype=tf.float32)
+        model_output = tf.import_graph_def(model_graph_def, name='model', input_map={'sr_input:0': image, 'sr_input_scale:0': model_input_scale}, return_elements=['sr_output:0'])[0]
+      except:
+        model_output = None
+    if (model_output is None):
+      try:
+        model_output = tf.import_graph_def(model_graph_def, name='model', input_map={'sr_input:0': image}, return_elements=['sr_output:0'])[0]
+      except:
+        model_output = None
+    
     
     model_output = model_output[0, :, :, :]
     model_output = tf.round(model_output)
